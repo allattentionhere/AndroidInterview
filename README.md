@@ -34,10 +34,10 @@ Calls to startActivity() can include a flag in the Intent that declares if and h
 
 
 ### Q. Lifecycle when going from Activity A to B.
-A(onPause) > B(onCreate) > B(onStart) > B(onResume) > A(onStop)
+A(onPause) -> B(onCreate) -> B(onStart) -> B(onResume) -> A(onStop)
 
 ### Q. On return from B to A.
-B(onPause) > A(onRestart) > A(onStart) > A(onResume) > B(onStop) > B(onDestroy)
+B(onPause) -> A(onRestart) -> A(onStart) -> A(onResume) -> B(onStop) -> B(onDestroy)
 
 ## ACTIVITY/INTENT
 
@@ -65,6 +65,18 @@ Activity implementations can optionally make use of the Fragment class for purpo
 A fragment is essentially a modular section of an activity, with its own lifecycle and input events, and which can be added or removed at will. It is important to remember, though, that a fragment’s lifecycle is directly affected by its host activity’s lifecycle; i.e., when the activity is paused, so are all fragments in it, and when the activity is destroyed, so are all of its fragments.
 
 ## FRAGMENTS
+
+### Q. Fragment lifecycle when Fragment B replaces Fragment A with addToBackStack
+A(onPause) -> A(onStop) -> A(onDestroyView) -> B(onAttach) -> B(onCreate) -> B(onCreateView) -> B(onActivityCreated) -> B(onStart) -> B(onResume)
+
+### Q. Fragment B is replaced by Fragment A and popbackstack is called (with addToBackStack). What will be the lifecycle? 
+B(onPause) -> B(onStop) -> B(onDestroyView) -> B(onDestroy) -> B(onDetach) -> A(onCreateView) -> A(onActivityCreated) -> A(onStart) -> A(onResume)
+
+### Q. Fragment lifecycle when Fragment B replaces Fragment A without addToBackStack
+A(onPause) -> A(onStop) -> A(onDestroyView) -> A(onDestroy) -> A(onDetach) -> B(onAttach) -> B(onCreate) -> B(onCreateView) -> B(onActivityCreated) -> B(onStart) -> B(onResume)
+
+### Q. Fragment lifecycle when Fragment B is added on top of Fragment A.
+B(onAttach) -> B(onCreate) -> B(onCreateView) -> B(onActivityCreated) -> B(onStart) -> B(onResume)
 
 ### Q. How can two fragments communicate?
 [See Example](https://developer.android.com/training/basics/fragments/communicating.html)
