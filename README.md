@@ -333,6 +333,9 @@ SharedPreference, Internal Storage, External Storage, SQLite DB, Network communi
 ### Q. What are some of security best practices?
 Don't use raw SQL query, use https, dnt store keys locally, dont log sensitive data, dnt store sensitive data in webview cache, disable backup as it is modifiable, obfuscate your code to prevent reverse engineer.
 
+### Q. APK compilation process and App start process.
+[[Here](https://github.com/dogriffiths/HeadFirstAndroid/wiki/How-Android-Apps-are-Built-and-Run)]
+
 ### Q. Explain Android platform Architecture.
 ![Platform Architecture](https://developer.android.com/guide/platform/images/android-stack_2x.png)
 **Linux Kernel:** Does threading and low-level memory management.
